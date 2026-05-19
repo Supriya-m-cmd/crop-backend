@@ -6,7 +6,8 @@ import pandas as pd
 from utils.soil_lookup import get_soil_data
 
 from utils.weather import get_weather
-
+from dotenv import load_dotenv
+load_dotenv()
 from utils.recommendation import (
     get_top_crop_recommendations
 )
@@ -42,9 +43,11 @@ app = FastAPI()
 # WEATHER API KEY
 # =========================================
 
-API_KEY = "fc1d2a35bbf05bc73510408b68667c56"
+import os
 
-
+API_KEY = os.getenv(
+    "OPENWEATHER_API_KEY"
+)
 # =========================================
 # INPUT MODEL
 # =========================================
