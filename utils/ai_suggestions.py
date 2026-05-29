@@ -1,11 +1,9 @@
-from groq import Groq
-
-
-# =========================================
-# GROQ CLIENT
-# =========================================
 import os
 from groq import Groq
+
+print("ENV CHECK START")
+print("GROQ_API_KEY =", repr(os.getenv("GROQ_API_KEY")))
+print("ENV CHECK END")
 
 client = Groq(
     api_key=os.getenv("GROQ_API_KEY")
