@@ -1,0 +1,202 @@
+﻿Diagnose log at 2026-05-29T17:16:07Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.7.3+5fa7116896c82164996a609accd1c5ad90fe730a
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26200)
+Reading environment variables... OK
+ Variables:
+OneDriveConsumer=C:\Users\HP\OneDrive
+ProgramFiles(x86)=C:\Program Files (x86)
+MSYSTEM=MINGW64
+ProgramW6432=C:\Program Files
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD
+OnlineServices=Online Services
+PROCESSOR_ARCHITECTURE=AMD64
+Path=C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\HP\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\MinGW\bin;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Go\bin;C:\Program Files\Git\cmd;C:\Program Files\Git LFS;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\HP\HP One Agent;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\MinGW\bin;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Go\bin;C:\Users\HP\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\HP\AppData\Local\Programs\Python\Python313\;C:\Users\HP\AppData\Local\Microsoft\WindowsApps;C:\Users\HP\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HP\AppData\Roaming\npm;C:\Users\HP\go\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.;C:\Users\HP\AppData\Local\Python\bin;C:\Users\HP\AppData\Local\GitHubDesktop\bin;C:\Users\HP\AppData\Local\Programs\Antigravity\bin
+USERPROFILE=C:\Users\HP
+SW_SIM_MPIT=INTELMPI
+PROCESSOR_REVISION=6801
+TEMP=C:\Users\HP\AppData\Local\Temp
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+FPS_BROWSER_USER_PROFILE_STRING=Default
+LOGONSERVER=\\THANUSHACHAR27
+TERM=xterm-256color
+USERNAME=HP
+SystemRoot=C:\WINDOWS
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+PLINK_PROTOCOL=ssh
+OneDrive=C:\Users\HP\OneDrive
+LOCALAPPDATA=C:\Users\HP\AppData\Local
+CommonProgramFiles=C:\Program Files\Common Files
+USERDOMAIN_ROAMINGPROFILE=THANUSHACHAR27
+ProgramData=C:\ProgramData
+platformcode=KV
+HOMEPATH=\Users\HP
+COMPUTERNAME=THANUSHACHAR27
+EFC_11848_1592913036=1
+ALLUSERSPROFILE=C:\ProgramData
+CommonProgramW6432=C:\Program Files\Common Files
+TMP=C:\Users\HP\AppData\Local\Temp
+SW_SIM_HYDRA=C:\Program Files\Common Files\SolidWorks Shared\Simulation Worker Agent\
+PT8HOME=C:\Program Files\Cisco Packet Tracer 9.0.0
+SESSIONNAME=Console
+DriverData=C:\Windows\System32\Drivers\DriverData
+HOMEDRIVE=C:
+windir=C:\WINDOWS
+GIT_TRACE2_PARENT_SID=baed9d0a-3f25-416a-baf0-2feb3efa52c3
+SystemDrive=C:
+NUMBER_OF_PROCESSORS=12
+OS=Windows_NT
+ProgramFiles=C:\Program Files
+ComSpec=C:\WINDOWS\system32\cmd.exe
+GIT_LFS_PATH=C:\Program Files\Git LFS
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+HOME=C:\Users\HP
+PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\
+PROMPT=$P$G
+TMPDIR=C:\Users\HP\AppData\Local\Temp
+APPDATA=C:\Users\HP\AppData\Roaming
+USERDOMAIN=THANUSHACHAR27
+PROCESSOR_LEVEL=23
+LC_CTYPE=C.UTF-8
+EFC_11848_344590478=1
+EFC_11848_4126798990=1
+SW_SIM_TEMP=C:\ProgramData\SOLIDWORKS\SW_net_sim_temp\
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+COLORTERM=truecolor
+RegionCode=APJ
+PUBLIC=C:\Users\Public
+GOPATH=C:\Users\HP\go
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\HP\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\HP\AppData\Local\Temp\782b4837ab310a43f34d38d7'... OK
+Reading from temporary file 'C:\Users\HP\AppData\Local\Temp\782b4837ab310a43f34d38d7'... OK
+Deleting temporary file 'C:\Users\HP\AppData\Local\Temp\782b4837ab310a43f34d38d7'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\HP
+UserDataDirectoryPath: C:\Users\HP\.gcm
+GetCurrentDirectory(): C:\Users\HP\OneDrive\Desktop\crop-backend
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:60610/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.54.0.windows.1'
+Locating current repository...Git repository at 'C:/Users/HP/OneDrive/Desktop/crop-backend/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:C:/Users/HP/.gitconfig	user.name=Supriya-m-cmd
+file:C:/Users/HP/.gitconfig	user.email=sm8067473@gmail.com
+file:C:/Users/HP/.gitconfig	credential.helper=manager
+file:C:/Users/HP/.gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Users/HP/.gitconfig	filter.lfs.required=true
+file:C:/Users/HP/.gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Users/HP/.gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Users/HP/.gitconfig	credential.https://huggingface.co.provider=generic
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	remote.origin.url=https://github.com/Supriya-m-cmd/crop-backend.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	remote.hf.url=https://huggingface.co/spaces/thansh/kisan-sathi-api
+file:.git/config	remote.hf.fetch=+refs/heads/*:refs/remotes/hf/*
+file:.git/config	lfs.repositoryformatversion=0
+file:.git/config	lfs.https://huggingface.co/spaces/thansh/kisan-sathi-api.git/info/lfs.locksverify=false
+file:.git/config	lfs.https://huggingface.co/spaces/thansh/kisan-sathi-api.git/info/lfs.access=basic
+file:.git/config	lfs.https://github.com/Thanushd27/kisan-sathi-backend.git/info/lfs.access=basic
+file:.git/config	branch.main.remote=origin
+file:.git/config	branch.main.merge=refs/heads/main
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\HP\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\HP\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+

@@ -7,12 +7,8 @@ from groq import Groq
 import os
 from groq import Groq
 
-api_key = os.environ.get("GROQ_API_KEY")
-
-print("GROQ KEY FOUND:", bool(api_key))
-
 client = Groq(
-    api_key=api_key
+    api_key=os.getenv("GROQ_API_KEY")
 )
 # =========================================
 # GENERATE AI SUGGESTIONS
