@@ -5,10 +5,14 @@ from groq import Groq
 # GROQ CLIENT
 # =========================================
 import os
+from groq import Groq
+
+api_key = os.environ.get("GROQ_API_KEY")
+
+print("GROQ KEY FOUND:", bool(api_key))
 
 client = Groq(
-
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key=api_key
 )
 # =========================================
 # GENERATE AI SUGGESTIONS
