@@ -1,13 +1,33 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+import os
 
 import pandas as pd
+
+from fastapi import FastAPI
+
+from pydantic import BaseModel
+
+from dotenv import load_dotenv
+
+
+# =========================================
+# LOAD ENV VARIABLES
+# =========================================
+
+load_dotenv()
+
+
+# =========================================
+# IMPORT UTILITIES
+# =========================================
 
 from utils.soil_lookup import get_soil_data
 
 from utils.weather import get_weather
-from dotenv import load_dotenv
-load_dotenv()
+
+from utils.rainfall_lookup import (
+    get_annual_rainfall
+)
+
 from utils.recommendation import (
     get_top_crop_recommendations
 )
@@ -36,18 +56,37 @@ from utils.encoder import (
 # FASTAPI APP
 # =========================================
 
-app = FastAPI()
+app = FastAPI(
+
+    title="Kisan Sathi API",
+
+    description=
+    "AI Powered Smart Agriculture Backend",
+
+    version="2.0.0"
+)
 
 
 # =========================================
-# WEATHER API KEY
+# API KEYS
 # =========================================
 
-import os
-
-API_KEY = os.getenv(
+OPENWEATHER_API_KEY = os.getenv(
     "OPENWEATHER_API_KEY"
 )
+
+
+# =========================================
+# CHECK API KEY
+# =========================================
+
+if OPENWEATHER_API_KEY is None:
+
+    print(
+        "OPENWEATHER_API_KEY not found"
+    )
+
+
 # =========================================
 # INPUT MODEL
 # =========================================
@@ -78,7 +117,30 @@ def home():
     return {
 
         "message":
-        "Kisan Sathi Smart Agriculture API Running"
+        "Kisan Sathi Smart Agriculture API Running",
+
+        "status":
+        "success"
+    }
+
+
+# =========================================
+# HEALTH ROUTE
+# =========================================
+
+@app.get("/health")
+
+def health():
+
+    return {
+
+        "server":
+        "running",
+
+        "weather_api":
+        "configured"
+        if OPENWEATHER_API_KEY
+        else "missing"
     }
 
 
@@ -90,7 +152,6 @@ def home():
 
 def recommend_crop(data: CropInput):
 
-
     try:
 
         # =====================================
@@ -101,7 +162,10 @@ def recommend_crop(data: CropInput):
 
             return {
 
-                "error":
+                "status":
+                "error",
+
+                "message":
                 "Invalid soil type"
             }
 
@@ -110,7 +174,10 @@ def recommend_crop(data: CropInput):
 
             return {
 
-                "error":
+                "status":
+                "error",
+
+                "message":
                 "Invalid season"
             }
 
@@ -122,7 +189,10 @@ def recommend_crop(data: CropInput):
 
             return {
 
-                "error":
+                "status":
+                "error",
+
+                "message":
                 "Invalid irrigation requirement"
             }
 
@@ -134,7 +204,10 @@ def recommend_crop(data: CropInput):
 
             return {
 
-                "error":
+                "status":
+                "error",
+
+                "message":
                 "Invalid water availability"
             }
 
@@ -146,7 +219,10 @@ def recommend_crop(data: CropInput):
 
             return {
 
-                "error":
+                "status":
+                "error",
+
+                "message":
                 "Invalid farming method"
             }
 
@@ -164,7 +240,10 @@ def recommend_crop(data: CropInput):
 
             return {
 
-                "error":
+                "status":
+                "error",
+
+                "message":
                 "District not found in Karnataka soil database"
             }
 
@@ -179,16 +258,34 @@ def recommend_crop(data: CropInput):
 
                 data.district,
 
-                API_KEY
+                OPENWEATHER_API_KEY
             )
 
-        except Exception:
+        except Exception as weather_error:
 
             return {
 
-                "error":
-                "Weather API failed"
+                "status":
+                "error",
+
+                "message":
+                "Weather API failed",
+
+                "details":
+                str(weather_error)
             }
+
+
+        # =====================================
+        # GET ANNUAL RAINFALL
+        # =====================================
+
+        annual_rainfall = (
+
+            get_annual_rainfall(
+                data.district
+            )
+        )
 
 
         # =====================================
@@ -199,21 +296,17 @@ def recommend_crop(data: CropInput):
             data.soil_type
         ]
 
-
         season_encoded = season_mapping[
             data.season
         ]
-
 
         irrigation_encoded = irrigation_mapping[
             data.irrigation_requirement
         ]
 
-
         water_encoded = irrigation_mapping[
             data.water_availability
         ]
-
 
         farming_encoded = farming_mapping[
             data.farming_method
@@ -245,7 +338,7 @@ def recommend_crop(data: CropInput):
             soil_data['ph'],
 
             "rainfall":
-            weather_data['rainfall'],
+            annual_rainfall,
 
             "soil_type":
             soil_encoded,
@@ -266,7 +359,7 @@ def recommend_crop(data: CropInput):
 
 
         # =====================================
-        # ML PREDICTION
+        # ML RECOMMENDATION
         # =====================================
 
         recommendations = (
@@ -288,7 +381,7 @@ def recommend_crop(data: CropInput):
                 recommendations,
 
                 rainfall=
-                weather_data['rainfall'],
+                annual_rainfall,
 
                 soil_type=
                 data.soil_type,
@@ -300,12 +393,13 @@ def recommend_crop(data: CropInput):
 
 
         # =====================================
-        # GENERATE AI SUGGESTIONS
+        # AI SUGGESTIONS
         # =====================================
 
         try:
 
             ai_suggestion = (
+
                 generate_crop_suggestion(
 
                     district=data.district,
@@ -322,6 +416,7 @@ def recommend_crop(data: CropInput):
         except Exception:
 
             ai_suggestion = (
+
                 "AI suggestion service unavailable"
             )
 
@@ -332,6 +427,9 @@ def recommend_crop(data: CropInput):
 
         return {
 
+            "status":
+            "success",
+
             "district":
             data.district,
 
@@ -340,6 +438,9 @@ def recommend_crop(data: CropInput):
 
             "weather":
             weather_data,
+
+            "annual_rainfall":
+            annual_rainfall,
 
             "recommendations":
             recommendations,
@@ -353,6 +454,9 @@ def recommend_crop(data: CropInput):
 
         return {
 
-            "error":
+            "status":
+            "error",
+
+            "message":
             str(e)
         }

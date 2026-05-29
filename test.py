@@ -1,23 +1,58 @@
+import os
+
 import pandas as pd
 
-from utils.rules import apply_agriculture_rules
+from dotenv import load_dotenv
+
+from utils.soil_lookup import get_soil_data
+
+from utils.weather import get_weather
 
 from utils.recommendation import (
     get_top_crop_recommendations
 )
 
+from utils.rules import (
+    apply_agriculture_rules
+)
+
+from utils.ai_suggestions import (
+    generate_crop_suggestion
+)
+
 from utils.encoder import (
 
     soil_type_mapping,
+
     season_mapping,
+
     irrigation_mapping,
+
     farming_mapping
 )
 
 
 # =========================================
-# HUMAN READABLE INPUTS
+# LOAD ENV VARIABLES
 # =========================================
+
+load_dotenv()
+
+
+# =========================================
+# GET API KEY FROM .env
+# =========================================
+
+API_KEY = os.getenv(
+    "OPENWEATHER_API_KEY"
+)
+
+
+# =========================================
+# USER INPUT
+# =========================================
+
+district = "Hubli"
 
 soil_type = "Black"
 
@@ -28,6 +63,40 @@ irrigation_requirement = "Medium"
 water_availability = "Medium"
 
 farming_method = "Traditional"
+
+
+# =========================================
+# GET SOIL DATA
+# =========================================
+
+soil_data = get_soil_data(
+    district
+)
+
+
+# =========================================
+# CHECK SOIL DATA
+# =========================================
+
+if soil_data is None:
+
+    print(
+        "District not found in soil database"
+    )
+
+    exit()
+
+
+# =========================================
+# GET WEATHER DATA
+# =========================================
+
+weather_data = get_weather(
+
+    district,
+
+    API_KEY
+)
 
 
 # =========================================
@@ -56,34 +125,46 @@ farming_encoded = farming_mapping[
 
 
 # =========================================
-# CREATE INPUT DATAFRAME
+# CREATE MODEL INPUT
 # =========================================
 
 input_df = pd.DataFrame([{
 
-    "Nitrogen": 48,
+    "Nitrogen":
+    soil_data['nitrogen'],
 
-    "phosphorus": 51,
+    "phosphorus":
+    soil_data['phosphorus'],
 
-    "potassium": 61,
+    "potassium":
+    soil_data['potassium'],
 
-    "temperature": 24,
+    "temperature":
+    weather_data['temperature'],
 
-    "humidity": 88,
+    "humidity":
+    weather_data['humidity'],
 
-    "ph": 7.4,
+    "ph":
+    soil_data['ph'],
 
-    "rainfall": 3,
+    "rainfall":
+    weather_data['rainfall'],
 
-    "soil_type": soil_encoded,
+    "soil_type":
+    soil_encoded,
 
-    "season": season_encoded,
+    "season":
+    season_encoded,
 
-    "irrigation_requirement": irrigation_encoded,
+    "irrigation_requirement":
+    irrigation_encoded,
 
-    "water_availability": water_encoded,
+    "water_availability":
+    water_encoded,
 
-    "farming_method": farming_encoded
+    "farming_method":
+    farming_encoded
 
 }])
 
@@ -92,8 +173,11 @@ input_df = pd.DataFrame([{
 # GET ML RECOMMENDATIONS
 # =========================================
 
-recommendations = get_top_crop_recommendations(
-    input_df
+recommendations = (
+
+    get_top_crop_recommendations(
+        input_df
+    )
 )
 
 
@@ -101,23 +185,56 @@ recommendations = get_top_crop_recommendations(
 # APPLY RULE ENGINE
 # =========================================
 
-recommendations = apply_agriculture_rules(
+recommendations = (
 
-    recommendations,
+    apply_agriculture_rules(
 
-    rainfall=3,
+        recommendations,
 
-    soil_type=soil_type,
+        rainfall=
+        weather_data['rainfall'],
 
-    season=season
+        soil_type=
+        soil_type,
+
+        season=
+        season
+    )
 )
 
 
 # =========================================
-# PRINT RESULTS
+# GENERATE AI SUGGESTIONS
 # =========================================
 
-print("\n===== TOP CROP RECOMMENDATIONS =====\n")
+ai_suggestion = generate_crop_suggestion(
+
+    district=district,
+
+    weather=weather_data,
+
+    soil_data=soil_data,
+
+    recommendations=recommendations
+)
+
+
+# =========================================
+# FINAL OUTPUT
+# =========================================
+
+print("\n===================================")
+
+print(" KISAN SATHI AI REPORT ")
+
+print("===================================\n")
+
+
+# =========================================
+# TOP CROPS
+# =========================================
+
+print("===== TOP RECOMMENDED CROPS =====\n")
 
 
 for index, rec in enumerate(
@@ -129,6 +246,91 @@ for index, rec in enumerate(
 
     print(
 
-        f"{index}. {rec['crop']} "
-        f"| Confidence: {rec['confidence']}%"
+        f"{index}. {rec['crop'].upper()}"
     )
+
+    print(
+
+        f"   Confidence : "
+        f"{rec['confidence']}%"
+    )
+
+    print("---------------------------------")
+
+
+# =========================================
+# WEATHER INFORMATION
+# =========================================
+
+print("\n===== WEATHER INFORMATION =====\n")
+
+print(
+
+    f"Temperature : "
+    f"{weather_data['temperature']} °C"
+)
+
+print(
+
+    f"Humidity    : "
+    f"{weather_data['humidity']} %"
+)
+
+print(
+
+    f"Rainfall    : "
+    f"{weather_data['rainfall']} mm"
+)
+
+print(
+
+    f"Condition   : "
+    f"{weather_data['condition']}"
+)
+
+
+# =========================================
+# SOIL HEALTH
+# =========================================
+
+print("\n===== SOIL HEALTH DATA =====\n")
+
+print(
+
+    f"Nitrogen    : "
+    f"{soil_data['nitrogen']}"
+)
+
+print(
+
+    f"Phosphorus  : "
+    f"{soil_data['phosphorus']}"
+)
+
+print(
+
+    f"Potassium   : "
+    f"{soil_data['potassium']}"
+)
+
+print(
+
+    f"pH Value    : "
+    f"{soil_data['ph']}"
+)
+
+
+# =========================================
+# AI SUGGESTIONS
+# =========================================
+
+print("\n===== AI FARMING SUGGESTIONS =====\n")
+
+print(ai_suggestion)
+
+
+print("\n===================================")
+
+print(" END OF REPORT ")
+
+print("===================================\n")
